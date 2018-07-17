@@ -1,0 +1,10 @@
+jobs:
+  - name: install_ec2_elasticsearch_job
+    type: runSh
+    steps:
+      - IN: aws_ec2_tf_ssh
+      - IN: aws_ec2_tf_info
+      - TASK:
+          name: install_elasticsearch
+          script:
+            - echo "$ec2_ins_0_ip"
