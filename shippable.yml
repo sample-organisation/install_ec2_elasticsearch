@@ -1,11 +1,25 @@
+resources:
+# Automation scripts repo
+  - name: install_ec2_elasticsearch_repo
+    type: gitRepo
+    integration: "drship_github"
+    versionTemplate:
+      sourceName: "sample-organisation/install_ec2_elasticsearch" # TODO: rename to devops-recipes
+      branch: master
+
+
 jobs:
   - name: install_ec2_elasticsearch_job
     type: runSh
     steps:
+      - IN: install_ec2_elasticsearch_repo
       - IN: aws_ec2_tf_ssh
       - IN: aws_ec2_tf_info
+        switch: off
       - TASK:
           name: install_elasticsearch
           script:
+            - pushd $(shipctl get_resource_state "install_ec2_elasticsearch_repo")
             - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "echo hello world"
             - ./install_elasticsearch.sh
+            - popd
