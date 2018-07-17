@@ -8,4 +8,5 @@ jobs:
           name: install_elasticsearch
           script:
             - echo "$ec2_ins_0_ip"
+            - printenv
             - ssh -i "$AWS_EC2_TF_SSH_KEYPATH" ubuntu@$ec2_ins_0_ip "echo hello world"
