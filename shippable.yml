@@ -8,7 +8,4 @@ jobs:
           name: install_elasticsearch
           script:
             - echo "$ec2_ins_0_ip"
-            - cd ~/.ssh
-            - ls
-            # - export PRIVATE_SSH_KEY=$(shipctl get_integration_resource_field aws_ec2_tf_ssh "privateKey")
-            # - ssh -i private.key ubuntu@$ec2_ins_0_ip "echo hello world"
+            - ssh -i "$AWS_EC2_TF_SSH_KEYPATH" ubuntu@$ec2_ins_0_ip "echo hello world"
