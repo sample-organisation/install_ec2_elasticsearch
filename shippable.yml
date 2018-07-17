@@ -20,6 +20,6 @@ jobs:
           name: install_elasticsearch
           script:
             - pushd $(shipctl get_resource_state "install_ec2_elasticsearch_repo")
-            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "echo hello world"
-            - ./install_elasticsearch.sh
+            - scp -i $AWS_EC2_TF_SSH_KEYPATH ./install_elasticsearch ubuntu@$ec2_ins_0_ip:install_elasticsearch.sh
+            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "ls"
             - popd
