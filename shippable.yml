@@ -9,7 +9,7 @@ jobs:
           script:
             - echo "$ec2_ins_0_ip"
             - export PRIVATE_SSH_KEY=$(shipctl get_integration_resource_field aws_ec2_tf_ssh "privateKey")
-            - echo "$PRIVATE_SSH_KEY" > private.key
+            - printf "$PRIVATE_SSH_KEY" > private.key
             - chmod 400 private.key
             - cat private.key
             - ssh -i private.key ubuntu@$ec2_ins_0_ip "echo hello world"
