@@ -7,11 +7,5 @@ jobs:
       - TASK:
           name: install_elasticsearch
           script:
-            - echo "$ec2_ins_0_ip"
-            - printenv
-            - export PUBLIC_SSH_KEY=$(shipctl get_integration_resource_field aws_ec2_tf_ssh "publicKey")
-            - echo "$PUBLIC_SSH_KEY"
-            - echo $AWS_EC2_TF_SSH_KEYPATH
-            - ls -la $AWS_EC2_TF_SSH_KEYPATH
-            - chmod 400 $AWS_EC2_TF_SSH_KEYPATH
             - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "echo hello world"
+            - ./install_elasticsearch.sh
