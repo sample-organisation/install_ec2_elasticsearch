@@ -8,3 +8,4 @@ jobs:
           name: install_elasticsearch
           script:
             - echo "$ec2_ins_0_ip"
+            - ssh ubuntu@$ec2_ins_0_ip "echo hello world"
