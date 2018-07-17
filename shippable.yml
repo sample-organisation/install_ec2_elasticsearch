@@ -22,5 +22,5 @@ jobs:
             - pushd $(shipctl get_resource_state "install_ec2_elasticsearch_repo")
             - scp -i $AWS_EC2_TF_SSH_KEYPATH ./install_elasticsearch.sh ubuntu@$ec2_ins_0_ip:install_elasticsearch.sh
             - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "chmod +x install_elasticsearch.sh"
-            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "sudo ./install_elasticsearch.sh"
+            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "./install_elasticsearch.sh"
             - popd
