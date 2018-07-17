@@ -27,4 +27,4 @@ jobs:
       - TASK:
           name: test_elasticsearch
           script:
-            - curl -X GET 'http://localhost:9200'
+            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "curl -X GET 'http://localhost:9200'"
