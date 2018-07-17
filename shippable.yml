@@ -18,8 +18,6 @@ jobs:
         switch: off
       - TASK:
           name: install_elasticsearch
-          runtime:
-            container: false
           script:
             - pushd $(shipctl get_resource_state "install_ec2_elasticsearch_repo")
             - scp -i $AWS_EC2_TF_SSH_KEYPATH ./install_elasticsearch.sh ubuntu@$ec2_ins_0_ip:install_elasticsearch.sh
@@ -28,7 +26,6 @@ jobs:
             - popd
       - TASK:
           name: test_elasticsearch
-          runtime:
-            container: false
           script:
+            - ifconfig
             - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "curl -X GET 'http://localhost:9200'"
