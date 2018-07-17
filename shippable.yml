@@ -11,4 +11,5 @@ jobs:
             - printenv
             - echo $AWS_EC2_TF_SSH_KEYPATH
             - ls -la $AWS_EC2_TF_SSH_KEYPATH
-            - ssh -i "$AWS_EC2_TF_SSH_KEYPATH" ubuntu@$ec2_ins_0_ip "echo hello world"
+            - chmod 400 $AWS_EC2_TF_SSH_KEYPATH
+            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "echo hello world"
