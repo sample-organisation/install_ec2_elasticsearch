@@ -27,8 +27,25 @@ jobs:
       - TASK:
           name: test_elasticsearch
           script:
-            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "cat /etc/hostname"
-            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "cat /etc/hosts"
-            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "sudo systemctl start elasticsearch"
-            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "ifconfig"
+            # - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "cat /etc/hostname"
+            # - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "cat /etc/hosts"
+            # - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "sudo systemctl start elasticsearch"
+            # - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "ifconfig"
             - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "curl -X GET 'http://localhost:9200'"
+
+
+  - name: uninstall_ec2_elasticsearch_job
+    type: runSh
+    steps:
+      - IN: install_ec2_elasticsearch_repo
+      - IN: aws_ec2_tf_ssh
+      - IN: aws_ec2_tf_info
+        switch: off
+      - TASK:
+          name: uninstall_elasticsearch
+          script:
+            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "sudo apt-get --purge autoremove elasticsearch"
+      - TASK:
+          name: test_elasticsearch
+          script:
+            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "curl -X GET 'http://localhost:9200'" || true
