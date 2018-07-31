@@ -44,7 +44,7 @@ jobs:
       - TASK:
           name: uninstall_elasticsearch
           script:
-            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "sudo apt-get --purge autoremove elasticsearch"
+            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "sudo apt-get --purge autoremove -y elasticsearch"
       - TASK:
           name: test_elasticsearch
           script:
