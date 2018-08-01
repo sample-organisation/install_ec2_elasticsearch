@@ -26,14 +26,14 @@ jobs:
             - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "chmod +x install_elasticsearch.sh"
             - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "sudo ./install_elasticsearch.sh"
             - popd
-      - TASK:
-          name: test_elasticsearch
-          script:
-            # - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "cat /etc/hostname"
-            # - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "cat /etc/hosts"
-            # - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "sudo systemctl start elasticsearch"
-            # - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "ifconfig"
-            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "curl -X GET 'http://localhost:9200'"
+      # - TASK:
+      #     name: test_elasticsearch
+      #     script:
+      #       # - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "cat /etc/hostname"
+      #       # - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "cat /etc/hosts"
+      #       # - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "sudo systemctl start elasticsearch"
+      #       # - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "ifconfig"
+      #       - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "curl -X GET 'http://localhost:9200'"
 
 
   - name: uninstall_ec2_elasticsearch_job
@@ -49,7 +49,7 @@ jobs:
           name: uninstall_elasticsearch
           script:
             - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "sudo apt-get --purge autoremove -y elasticsearch"
-      - TASK:
-          name: test_elasticsearch
-          script:
-            - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "curl -X GET 'http://localhost:9200'" || true
+      # - TASK:
+      #     name: test_elasticsearch
+      #     script:
+      #       - ssh -i $AWS_EC2_TF_SSH_KEYPATH ubuntu@$ec2_ins_0_ip "curl -X GET 'http://localhost:9200'" || true
